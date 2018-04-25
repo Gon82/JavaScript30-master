@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>file:///E:/proyectos/02_Coding/JavaScript30-master/03 - CSS Variables/index-START.html
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -22,9 +22,18 @@
 
   <style>
 
-    /*
-      misc styles, nothing to do with CSS variables
-    */
+
+    :root{
+      --padding: 10px;
+      --blur: 10px;
+      --base: red;     
+    }
+    
+    img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur));
+    }
 
     body {
       text-align: center;
@@ -45,6 +54,19 @@
   </style>
 
   <script>
+
+    const inputs = document.querySelectorAll('.controls input')
+
+    inputs.forEach(function(input){
+      input.addEventListener('change', function () {
+          const suffix = this.dataset.sizing || '';
+          document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix);
+        })
+
+    })
+   
+    
+
   </script>
 
 </body>

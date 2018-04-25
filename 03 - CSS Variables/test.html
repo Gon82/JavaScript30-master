@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>css variables</title>
+
+	<style>
+	
+	:root{
+		--base: #3e4144;
+		--main: red;
+	}	
+	.container{
+		height: 100vh;
+		width: 100vw;
+		background: var(--base);
+		display: grid;
+		align-content: center;
+		justify-items: center;
+	}
+
+	.figura{
+		height: 30px;
+		width: 30px;
+		display: grid;
+		background: var(--main);	
+	}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+		<input name="base" type="text">
+		<input name="main" type="text">
+		<div class="figura"></div>
+	</div>
+	<script>
+
+	const inputs = document.querySelectorAll('input')
+
+	inputs.forEach(function(input){
+		input.addEventListener('keyup', function(e) {
+			console.log('f')
+			if(e.keyCode == 13 ){
+				document.documentElement.style.setProperty(`--${this.name}`, `#${this.value}`);
+			}
+		})
+	})
+	
+	</script>
+	
+</body>
+</html>
