@@ -7,6 +7,7 @@
 <body>
   <p><em>Psst: have a look at the JavaScript Console</em> 💁</p>
   <script>
+    'use strict'
     // Get your shorts on - this is an array workout!
     // ## Array Cardio Day 1
 
@@ -31,16 +32,42 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+    function personasDel1500(cadauno) {   
+      return (cadauno.year >=1500 && cadauno.year <1600);
+    }
+    console.log(inventors.filter(personasDel1500));
+    
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
+
+    function nombreCompleto(cadauno){
+      return cadauno.first + ' ' + cadauno.last;
+    }
+    console.log(inventors.map(nombreCompleto));
+    
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
+    function ordernarPorNacimiento(primero, segundo) {
+        return primero.year > segundo.year ? 1:-1; //-> operador ternaria ;) abajo la solución con más lineas :( 
+       
+        // if(primero.year < segundo.year){
+        //   return -1;
+        // }else{
+        //   return 1
+        // }
+
+      }
+      console.table(inventors.sort(ordernarPorNacimiento));
+
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live?
 
+      inventors.reduce(livedYears)
+
+      
+      
     // 5. Sort the inventors by years lived
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
