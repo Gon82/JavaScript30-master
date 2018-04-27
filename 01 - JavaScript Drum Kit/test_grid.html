@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>!!!grid</title>
+	<style>
+		#container {
+			display: grid;
+			width: 100vw;
+			height: 100vh;
+			grid-template-columns:repeat(1fr);
+			grid-gap: 3px;
+			transition: all 1s;
+
+		}
+
+
+		.block {
+			display: grid;
+			background: #575757;
+			transition: all 1s;
+			width: 100%;
+		}
+		.block:hover {
+
+			width: 120%;
+		}	
+		.block1{background: #b1a2cc}		
+		.block2{background: #a2ccbe}
+		.block3{background: #ccc1a2}		
+
+
+	</style>
+
+
+
+
+
+</head>
+
+<body>
+	<div id="container">
+		<div class="block block1"></div>
+		<div class="block block2"></div>
+		<div class="block block3"></div>
+	</div>
+
+</body>
+
+</html>
