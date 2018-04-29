@@ -99,6 +99,44 @@
   </div>
 
 <script>
+const inbox = document.querySelector('.inbox')
+const checkboxArr = Array.from(document.querySelectorAll('[type="checkbox"]'));
+
+document.addEventListener('keydown', shift);
+inbox.addEventListener('change', select);
+
+function shit(e) { 
+  return true  
+}  
+function select(e){
+      selectedArr = [];
+      console.log(e.target);
+      while (e.target.keyCode == 16){     
+          if( e.target.checked == true){  
+                console.log(checkboxArr.indexOf(e.target));
+                selectedArr.push(checkboxArr.indexOf(e.target))
+                
+          }
+      }          
+}
+
+          
+        
+
+
+
+function render(sel1, sel2){
+  
+  checkboxArr.forEach((item, i) => {
+    
+    if(i >=Sel1  && i<=Sel2){
+      item.checked = true
+    }
+
+  })
+}
+
+
 </script>
 </body>
 </html>
