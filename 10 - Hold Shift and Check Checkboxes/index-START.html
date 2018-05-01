@@ -1,142 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Hold Shift to Check Multiple Checkboxes</title>
+	<meta charset="UTF-8">
+	<title>Hold Shift to Check Multiple Checkboxes</title>
 </head>
+
 <body>
-  <style>
+	<style>
+		html {
+			font-family: sans-serif;
+			background: #ffc600;
+		}
 
-    html {
-      font-family: sans-serif;
-      background:#ffc600;
-    }
+		.inbox {
+			max-width: 400px;
+			margin: 50px auto;
+			background: white;
+			border-radius: 5px;
+			box-shadow: 10px 10px 0 rgba(0, 0, 0, 0.1);
+		}
 
-    .inbox {
-      max-width:400px;
-      margin:50px auto;
-      background:white;
-      border-radius:5px;
-      box-shadow:10px 10px 0 rgba(0,0,0,0.1);
-    }
+		.item {
+			display: flex;
+			align-items: center;
+			border-bottom: 1px solid #F1F1F1;
+		}
 
-    .item {
-      display:flex;
-      align-items:center;
-      border-bottom: 1px solid #F1F1F1;
-    }
-
-    .item:last-child {
-      border-bottom:0;
-    }
-
-
-    input:checked + p {
-      background:#F9F9F9;
-      text-decoration: line-through;
-    }
-
-    input[type="checkbox"] {
-      margin:20px;
-    }
-
-    p {
-      margin:0;
-      padding:20px;
-      transition:background 0.2s;
-      flex:1;
-      font-family:'helvetica neue';
-      font-size: 20px;
-      font-weight: 200;
-      border-left: 1px solid #D1E2FF;
-    }
+		.item:last-child {
+			border-bottom: 0;
+		}
 
 
-  </style>
-   <!--
-   The following is a common layout you would see in an email client.
+		input:checked+p {
+			background: #F9F9F9;
+			text-decoration: line-through;
+		}
 
-   When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
+		input[type="checkbox"] {
+			margin: 20px;
+		}
 
-  -->
-  <div class="inbox">
-    <div class="item">
-      <input type="checkbox">
-      <p>This is an inbox layout.</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>Check one item</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>Hold down your Shift key</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>Check a lower item</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>Everything inbetween should also be set to checked</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>Try do it without any libraries</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>Just regular JavaScript</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>Good Luck!</p>
-    </div>
-    <div class="item">
-      <input type="checkbox">
-      <p>Don't forget to tweet your result!</p>
-    </div>
-  </div>
+		p {
+			margin: 0;
+			padding: 20px;
+			transition: background 0.2s;
+			flex: 1;
+			font-family: 'helvetica neue';
+			font-size: 20px;
+			font-weight: 200;
+			border-left: 1px solid #D1E2FF;
+		}
+	</style>
+	<!--
+	 The following is a common layout you would see in an email client.
 
-<script>
-const inbox = document.querySelector('.inbox')
+	 When a user clicks a checkbox, holds Shift, and then clicks another checkbox a few rows down, all the checkboxes inbetween those two checkboxes should be checked.
+
+	-->
+	<div class="inbox">
+		<div class="item">
+			<input type="checkbox">
+			<p>This is an inbox layout.</p>
+		</div>
+		<div class="item">
+			<input type="checkbox">
+			<p>Check one item</p>
+		</div>
+		<div class="item">
+			<input type="checkbox">
+			<p>Hold down your Shift key</p>
+		</div>
+		<div class="item">
+			<input type="checkbox">
+			<p>Check a lower item</p>
+		</div>
+		<div class="item">
+			<input type="checkbox">
+			<p>Everything inbetween should also be set to checked</p>
+		</div>
+		<div class="item">
+			<input type="checkbox">
+			<p>Try do it without any libraries</p>
+		</div>
+		<div class="item">
+			<input type="checkbox">
+			<p>Just regular JavaScript</p>
+		</div>
+		<div class="item">
+			<input type="checkbox">
+			<p>Good Luck!</p>
+		</div>
+		<div class="item">
+			<input type="checkbox">
+			<p>Don't forget to tweet your result!</p>
+		</div>
+	</div>
+
+	<script>
+
+
+
+
+// const inbox = document.querySelector('.inbox')
+// const item = Array.from(document.querySelectorAll('.item'));
+
 const checkboxArr = Array.from(document.querySelectorAll('[type="checkbox"]'));
-
+checkboxArr.forEach(item =>addEventListener('click', select));
 document.addEventListener('keydown', shift);
-inbox.addEventListener('change', select);
 
-function shit(e) { 
-  return true  
-}  
-function select(e){
-      selectedArr = [];
-      console.log(e.target);
-      while (e.target.keyCode == 16){     
-          if( e.target.checked == true){  
-                console.log(checkboxArr.indexOf(e.target));
-                selectedArr.push(checkboxArr.indexOf(e.target))
-                
-          }
-      }          
+
+function shift(e) { 
+	if (e.keyCode == 16){
+		// console.log(e);
+		 return true
+	}else{
+		return false;
+	}
+}
+	
+
+
+
+let lastSelected = [];
+
+function select(e) {
+	console.log(e.target.checked)
+	
+	
+	if (e.target.checked  && shift == true) {
+		// checkboxArr.forEach(element => {
+			console.log('mandarino');
+			
+		}
+		// lastSelected.push(checkboxArr.indexOf(e.target));
+
+		// console.log(lastSelected);
+		// inbox.removeEventListener('keydown', select);
+
+		// if (lastSelected.length >= 2) {
+		// 	render(lastSelected[0], lastSelected[1])
+		// 	lastSelected = [];
+		// }
+	
 }
 
-          
-        
+function render(a, b) {
+	//swap vars
+	if (a > b) [a, b] = [b, a];
 
+	checkboxArr.forEach((item, i) => {
 
+		if (i >= a && i <= b) {
+			// item.checked == true ? item.checked = false : item.checked = true;  
+			item.checked = true;
+		}
 
-function render(sel1, sel2){
-  
-  checkboxArr.forEach((item, i) => {
-    
-    if(i >=Sel1  && i<=Sel2){
-      item.checked = true
-    }
-
-  })
+	})
 }
 
 
-</script>
+
+	</script>
 </body>
+
 </html>
