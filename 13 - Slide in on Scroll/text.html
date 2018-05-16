@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Scroll</title>
+
+<style>
+	body{
+		font-family: sans-serif;
+		padding: 0;
+		margin: 0;
+	}
+	.div1{
+		display:grid;
+		justify-items: center;
+		align-items: center;
+		background: linear-gradient(50deg, #ffa2f4 00%, #df28e3 100%);
+		height: 100vh;
+		width: 100vw;
+	}
+	.div2{
+		display:grid;
+		justify-items: center;
+		align-items: center;
+		background: linear-gradient(45deg, #bda0d0 0%, #a967d4 100%);
+		height: 100vh;
+		width: 100vw;
+	}
+	.div3{
+		display:grid;
+		justify-items: center;
+		align-items: center;		
+		background: #b3daec;
+		height: 100vh;
+		width: 100vw;
+	}
+	h1{
+		display:grid;	
+		font-size: 50px;
+		color: #ffffff;
+		text-align: center;
+		opacity: 0;
+		transform: translateX(200px);
+		transition: all 1s;
+		transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+	}
+	h1:focus{
+		outline:none;
+	}
+
+	.visible{
+		transform: translateX(0);
+		opacity: 1;
+	}
+
+	#info{
+		position: fixed;
+		font-size: 14px;
+		color:#fff;
+		opacity:.7;
+	}
+
+</style>
+
+</head>
+<script>
+
+document.addEventListener('DOMContentLoaded', function(){
+
+
+	/*debouncing scroll para mejorar performance*/
+	var waiting = false;
+	window.addEventListener("scroll", function () {
+		if (waiting) {
+			return;
+		}
+
+		waiting = true;
+		scroll();
+		displayInfo();
+
+		setTimeout(function () {
+			waiting = false;
+		}, 0);
+	});
+	
+	/*scroll*/
+	function scroll(e) {
+		const titulos = document.querySelectorAll('h1');
+
+		
+		/*visor está a la altura del texto*/
+		titulos.forEach((t)=>{
+			
+			if(t.offsetTop < (window.scrollY + window.innerHeight/2) ){
+				t.classList.add("visible");
+				console.log(t.offsetTop +"  "+ window.scrollY  +"   "+(window.scrollY + window.innerHeight/2))
+			}
+			if(t.offsetTop > (window.scrollY + window.innerHeight/2)){
+				t.classList.remove("visible");
+			}
+
+		})
+
+
+
+	};
+
+	/*resize*/
+	window.addEventListener('resize', displayInfo)
+	
+	/*display info*/
+	function displayInfo(e) {
+// 		console.log("resize")
+		const info = document.getElementById('info')
+		info.innerHTML = `
+		<strong>innerWidth:</strong> ${window.innerWidth}px<br>
+		<strong>innerHeight:</strong>: ${window.innerHeight}px<br>
+		<strong>window.scrollY:</strong> ${window.scrollY}px
+		`;
+	}
+
+
+
+
+
+	
+})
+</script>
+
+<body>
+	<div id="info">
+	
+	</div>
+	<div class="div1">
+			<h1 contenteditable="true" id="primero">Perci</h1>	
+	</div>
+	<div class="div2">
+			<h1 contenteditable="true">El cochino</h1>
+	</div>
+		
+	<div class="div3">
+			<h1 contenteditable="true">Malandrín</h1>
+	</div>
+	
+</body>
+</html>
+
